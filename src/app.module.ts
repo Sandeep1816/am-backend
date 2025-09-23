@@ -10,17 +10,17 @@ import { ProductsModule } from './products/products.module';
 import { CartModule } from './cart/cart.module';
 import { OrdersModule } from './orders/orders.module';
 
-import { AppController } from './app.controller'; // ✅ Import
-import { AppService } from './app.service';       // ✅ Import
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
 
 @Module({
   imports: [
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
-      context: ({ req }) => ({ req }),
-      csrfPrevention: true,
-      playground: true,
+      context: ({ req, res }) => ({ req, res }), // Pass req/res to resolvers
+      playground: true,       // Browser playground enabled
+      csrfPrevention: true,   // Keep CSRF protection
     }),
     AuthModule,
     UsersModule,
@@ -28,7 +28,7 @@ import { AppService } from './app.service';       // ✅ Import
     CartModule,
     OrdersModule,
   ],
-  controllers: [AppController],  // Now works
+  controllers: [AppController],
   providers: [PrismaService, AppService],
 })
 export class AppModule {}
