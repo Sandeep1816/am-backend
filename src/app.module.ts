@@ -10,6 +10,9 @@ import { ProductsModule } from './products/products.module';
 import { CartModule } from './cart/cart.module';
 import { OrdersModule } from './orders/orders.module';
 
+import { AppController } from './app.controller'; // ✅ Import
+import { AppService } from './app.service';       // ✅ Import
+
 @Module({
   imports: [
     GraphQLModule.forRoot<ApolloDriverConfig>({
@@ -25,7 +28,7 @@ import { OrdersModule } from './orders/orders.module';
     CartModule,
     OrdersModule,
   ],
-  controllers: [AppController],  // ✅ Add controller here
+  controllers: [AppController],  // Now works
   providers: [PrismaService, AppService],
 })
 export class AppModule {}
