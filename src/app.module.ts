@@ -16,6 +16,7 @@ import { OrdersModule } from './orders/orders.module';
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       context: ({ req }) => ({ req }),
+       sandbox: true,
     }),
     AuthModule,
     UsersModule,
