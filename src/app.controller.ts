@@ -6,7 +6,8 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  getHello() {
-    return { message: this.appService.getHello() };
+  health() {
+    // JSON health check endpoint
+    return { status: 'API is running', message: this.appService.getHello() };
   }
 }
