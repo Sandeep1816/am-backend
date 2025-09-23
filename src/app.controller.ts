@@ -7,7 +7,7 @@ export class AppController {
 
   @Get()
   getHello() {
+    // return JSON for safer access from clients
     return { message: this.appService.getHello() };
   }
 }
-
