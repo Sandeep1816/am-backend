@@ -16,8 +16,8 @@ import { OrdersModule } from './orders/orders.module';
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       context: ({ req }) => ({ req }),
-      csrfPrevention: true,        // keep CSRF protection
-      playground: true,            // ✅ enables GraphQL playground safely
+      csrfPrevention: true,
+      playground: true,
     }),
     AuthModule,
     UsersModule,
@@ -25,6 +25,7 @@ import { OrdersModule } from './orders/orders.module';
     CartModule,
     OrdersModule,
   ],
-  providers: [PrismaService],
+  controllers: [AppController],  // ✅ Add controller here
+  providers: [PrismaService, AppService],
 })
 export class AppModule {}
