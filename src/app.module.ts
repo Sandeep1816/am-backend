@@ -15,13 +15,17 @@ import { AppService } from './app.service';
 
 @Module({
   imports: [
-    GraphQLModule.forRoot<ApolloDriverConfig>({
-      driver: ApolloDriver,
-      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
-      context: ({ req, res }) => ({ req, res }), // Pass req/res to resolvers
-      playground: true,       // Browser playground enabled
-      csrfPrevention: true,   // Keep CSRF protection
-    }),
+GraphQLModule.forRoot<ApolloDriverConfig>({
+  driver: ApolloDriver,
+  autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+  context: ({ req, res }) => ({ req, res }),
+
+  // 👇 Conditional config
+  playground: process.env.NODE_ENV !== 'production',
+  introspection: true,   // keep this TRUE so Postman and clients can fetch schema
+  csrfPrevention: true,
+}),
+
     AuthModule,
     UsersModule,
     ProductsModule,
